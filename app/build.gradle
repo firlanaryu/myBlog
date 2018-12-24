@@ -33,11 +33,14 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.2.0' //circle image
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0' //android image crop library
-    implementation 'com.github.bumptech.glide:glide:4.8.0' //An image loading and caching library for Android focused on smooth scrolling
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0' //An image loading and caching library for Android focused on smooth scrolling
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    //An image loading and caching library for Android focused on smooth scrolling
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //An image loading and caching library for Android focused on smooth scrolling
 
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
+    implementation 'com.android.support:design:27.1.1'
 }

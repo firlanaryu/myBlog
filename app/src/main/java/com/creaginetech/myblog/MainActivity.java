@@ -1,11 +1,13 @@
 package com.creaginetech.myblog;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,6 +17,7 @@ import java.util.zip.Inflater;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mainToolbar;
+    private FloatingActionButton btnAddPost;
 
     private FirebaseAuth mAuth;
 
@@ -29,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mainToolbar);
         //for title on Toolbar
         getSupportActionBar().setTitle("My Blog");
+
+        btnAddPost = findViewById(R.id.btn_add_post);
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent newPostIntent = new Intent(MainActivity.this,NewPostActivity.class);
+                startActivity(newPostIntent);
+
+            }
+        });
 
 
     }

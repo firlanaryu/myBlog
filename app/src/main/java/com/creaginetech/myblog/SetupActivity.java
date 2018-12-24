@@ -124,12 +124,14 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 final String user_name = edt_setup_name.getText().toString();
+
+                if (!TextUtils.isEmpty(user_name) && mainImageUri != null) {
                 setupProgress.setVisibility(View.VISIBLE);
 
                 //if image changed
-                if (isChanged) {
+                    if (isChanged) {
 
-                    if (!TextUtils.isEmpty(user_name) && mainImageUri != null) {
+
 
                         user_id = FirebaseAuth.getInstance().getUid();
 
@@ -168,11 +170,11 @@ public class SetupActivity extends AppCompatActivity {
                             }
                         });
 
-                    }
-                } else {
+                    }else {
 
                     storeFirestore(null ,user_name);
 
+                    }
                 }
 
             }
