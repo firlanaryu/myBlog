@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String regPaassConfirm = edtRegPasswordConfirm.getText().toString();
 
                 if (!TextUtils.isEmpty(regEmail) && !TextUtils.isEmpty(regPass) && !TextUtils.isEmpty(regPaassConfirm)){
-                    //if password equals with confirm password field
+                    //if password equals confirm password
                     if (regPass.equals(regPaassConfirm)){
 
                         progressBarRegister.setVisibility(View.VISIBLE);
