@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">My Blog</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Enter Your Email</string>
+    <string name="login_logo_decs">Login Logo</string>
+    <string name="login_button_text">Login to Account</string>
+    <string name="register_button_text">Register Account</string>
+    <string name="action_search_text">Search</string>
+    <string name="action_settings_text">Account Settings</string>
+    <string name="action_logout_text">Logout</string>
+    <string name="register_text">Create New Account</string>
+    <string name="register_login_text">Already have an Account ?</string>
+    <string name="register_pass_hint">Confirm Password</string>
+    <string name="setup_name_hint">Your name ...</string>
+    <string name="btn_setup_name_text">Save Account Settings</string>
+</resources>
