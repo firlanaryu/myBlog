@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -81,13 +80,12 @@ public class MainActivity extends AppCompatActivity {
                             Intent setupIntent = new Intent(MainActivity.this,SetupActivity.class);
                             startActivity(setupIntent);
                             finish();
-
-                        } else {
-
-                            String errorMessage = task.getException().getMessage();
-                            Toast.makeText(MainActivity.this, "Error : " +errorMessage, Toast.LENGTH_LONG).show();
-
                         }
+
+                    } else {
+                        String errorMessage = task.getException().getMessage();
+                        Toast.makeText(MainActivity.this, "Error = "+errorMessage, Toast.LENGTH_LONG).show();
+
                     }
 
                 }
@@ -129,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             default:
+
                 return false;
 
         }

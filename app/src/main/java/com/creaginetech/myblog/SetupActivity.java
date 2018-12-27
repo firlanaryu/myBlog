@@ -131,8 +131,6 @@ public class SetupActivity extends AppCompatActivity {
                 //if image changed
                     if (isChanged) {
 
-
-
                         user_id = FirebaseAuth.getInstance().getUid();
 
                         //for uplad image to firebase storage

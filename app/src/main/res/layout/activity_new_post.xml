@@ -21,14 +21,14 @@
         android:id="@+id/image_new_post"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_new_post"
-        app:srcCompat="@mipmap/image_shoes" />
+        app:srcCompat="@mipmap/add_post_image" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/new_post_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,6 +37,7 @@
         android:ems="10"
         android:hint="@string/post_desc_hint"
         android:inputType="textMultiLine"
+        android:maxLength="125"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_new_post" />
@@ -56,5 +57,16 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/new_post_desc" />
+
+    <ProgressBar
+        android:id="@+id/new_post_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_new_post" />
 </android.support.constraint.ConstraintLayout>
