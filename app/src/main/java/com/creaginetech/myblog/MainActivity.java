@@ -1,8 +1,12 @@
 package com.creaginetech.myblog;
 
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,12 +22,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.zip.Inflater;
-
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mainToolbar;
     private FloatingActionButton btnAddPost;
+    private BottomNavigationView mainBottomNav;
 
     private String current_user_id;
 
@@ -43,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
         //for title on Toolbar
         getSupportActionBar().setTitle("My Blog");
 
+        //Fragment -step 2
+        mainBottomNav = findViewById(R.id.mainBottomNav);
+        mainBottomNav.setOnNavigationItemSelectedListener( mOnNavigationItemSelectedListener );
+
+
         btnAddPost = findViewById(R.id.btn_add_post);
         btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +63,37 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    //Fragment -step 3
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment fragment;
+
+            switch (item.getItemId()){
+
+                case R.id.bottom_action_home :
+                    fragment = new HomeFragment();
+                    replaceFragment(fragment);
+                    return true;
+
+                case R.id.bottom_action_notification :
+                    fragment = new NotificationFragment();
+                    replaceFragment(fragment);
+                    return true;
+
+                case R.id.bottom_action_account :
+                    fragment = new AccountFragment();
+                    replaceFragment(fragment);
+                    return true;
+
+            }
+
+            return false;
+        }
+    };
 
     @Override
     protected void onStart() {
@@ -139,4 +178,15 @@ public class MainActivity extends AppCompatActivity {
         mAuth.signOut();
         sendToLogin();
     }
+
+    //Fragment -step 1
+    private void replaceFragment(Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, fragment); //main container is frame Layout at activity_main
+        fragmentTransaction.commit();
+
+
+    }
+
 }

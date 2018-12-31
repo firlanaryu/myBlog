@@ -57,7 +57,6 @@ public class NewPostActivity extends AppCompatActivity {
     private Bitmap compressedImageFile;
     private String current_user_id;
 
-    private static final int MAX_LENGTH = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,9 +132,9 @@ public class NewPostActivity extends AppCompatActivity {
 
                                 try {
                                     compressedImageFile = new Compressor(NewPostActivity.this)
-                                            .setMaxWidth(200)
-                                            .setMaxHeight(200)
-                                            .setQuality(10)
+                                            .setMaxWidth(100)
+                                            .setMaxHeight(100)
+                                            .setQuality(2)
                                             .compressToBitmap(actualImageFile);
 
                                 } catch (IOException e) {
@@ -209,18 +208,6 @@ public class NewPostActivity extends AppCompatActivity {
 
     }
 
-    //Android random string generator
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
