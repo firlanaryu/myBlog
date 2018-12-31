@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 sendToMain();
 
-
                             }else {
 
                                 String errorMessage = task.getException().getMessage();
