@@ -156,7 +156,7 @@ public class NewPostActivity extends AppCompatActivity {
 
                                         Map<String,Object> postMap = new HashMap<>();
                                         postMap.put("image_url",downloadUri.toString()); //convert image to string when save to firestore
-                                        postMap.put("thumb",downloadThumbUri);
+                                        postMap.put("image_thumb",downloadThumbUri);
                                         postMap.put("desc",decs);
                                         postMap.put("user_id",current_user_id);
                                         postMap.put("timestamp",FieldValue.serverTimestamp()); //serverTimeStamp = like date
