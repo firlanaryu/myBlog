@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String current_user_id;
 
+    private HomeFragment homeFragment;
+    private NotificationFragment notificationFragment;
+    private AccountFragment accountFragment;
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
@@ -49,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         //Fragment -step 2
         mainBottomNav = findViewById(R.id.mainBottomNav);
         mainBottomNav.setOnNavigationItemSelectedListener( mOnNavigationItemSelectedListener );
+
+        //FRAGMENTS
+        homeFragment = new HomeFragment();
+        notificationFragment = new NotificationFragment();
+        accountFragment = new AccountFragment();
+
+        //set default to HomeFragment
+        replaceFragment(homeFragment);
 
 
         btnAddPost = findViewById(R.id.btn_add_post);
