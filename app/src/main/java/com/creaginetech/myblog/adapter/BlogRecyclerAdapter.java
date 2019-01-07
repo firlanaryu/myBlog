@@ -10,16 +10,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.creaginetech.myblog.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
 
     public List<BlogPost> blog_list;
     public Context context;
+
+    private FirebaseFirestore firebaseFirestore;
 
     public BlogRecyclerAdapter(List<BlogPost> blog_list){
 
@@ -36,11 +45,13 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_list_item, parent,false);
         context = parent.getContext();
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         //load desc
         String desc_data = blog_list.get(position).getDesc();
@@ -50,8 +61,31 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         String image_url = blog_list.get(position).getImage_url();
         holder.setBlogImage(image_url);
 
+        //load user_id NAME from firestore
         String user_id = blog_list.get(position).getUser_id();
         //user data will be retrieved here...
+        firebaseFirestore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+
+                    String userName = task.getResult().getString("name");
+                    String userImage = task.getResult().getString("image");
+
+                    holder.setUserData(userName,userImage);
+
+                } else {
+
+
+                    //firebase exception
+
+
+                }
+
+
+            }
+        });
 
         //load date time to string
         long millisecond = blog_list.get(position).getTimestamp().getTime();
@@ -70,8 +104,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
         private View mView;
 
-        private TextView descView,blogDate;
+        private TextView descView,blogDate,blogUserName;
         private ImageView blogImageView;
+        private CircleImageView blogUserImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -91,7 +126,12 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
             //load data image_url
             blogImageView = mView.findViewById(R.id.blog_image);
-            Glide.with(context).load(downloadUri).into(blogImageView);
+
+            //set default postImage when loading to load postImage from fireStore
+            RequestOptions placeholderOption = new RequestOptions();
+            placeholderOption.placeholder(R.drawable.imagepost);
+
+            Glide.with(context).applyDefaultRequestOptions(placeholderOption).load(downloadUri).into(blogImageView);
 
         }
 
@@ -99,6 +139,21 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
             blogDate = mView.findViewById(R.id.blog_date);
             blogDate.setText(date);
+
+        }
+
+        public void setUserData (String username, String userImage){
+
+            blogUserName = mView.findViewById(R.id.blog_username);
+            blogUserImage = mView.findViewById(R.id.blog_user_image);
+
+            blogUserName.setText(username);
+
+            //set default userImage when loading to load userImage from fireStore
+            RequestOptions placeholderOption = new RequestOptions();
+            placeholderOption.placeholder(R.mipmap.avatar_image);
+
+            Glide.with(context).applyDefaultRequestOptions(placeholderOption).load(userImage).into(blogUserImage);
 
         }
 
