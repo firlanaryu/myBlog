@@ -76,7 +76,9 @@ public class HomeFragment extends Fragment {
 
                     if (reachedBottom){
 
+                        //show description for last item
                         String desc = lastVisible.getString("desc");
+
                         Toast.makeText(container.getContext(), "Reached : " + desc, Toast.LENGTH_SHORT).show();
 
                         loadMorePost();
@@ -87,7 +89,6 @@ public class HomeFragment extends Fragment {
 
             //to sequence post from new post to old post (DESCENDING) and limit 3 post
             //for next Query search on firebase firestore document
-
             Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING).limit(3);
             firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
